@@ -2,75 +2,88 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Reloadable Account — demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reloadable Account – demo</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="topbar">
     <div class="logo">
-      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Ccircle cx='14' cy='14' r='12' fill='%2306a84b'/%3E%3C/svg%3E" alt="logo">
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%2300aa00'/%3E%3C/svg%3E" alt="logo" />
     </div>
   </header>
 
   <main class="container">
+    <!-- Greeting -->
     <div class="greeting">
-      <div class="check">✔</div>
-      <div>You're welcome, <strong id="userName">James</strong></div>
+      <div class="check"></div>
+      <div>You're welcome, <strong id="userName">Guest</strong></div>
     </div>
 
+    <!-- Balance Card -->
     <section class="card balance-card">
       <div class="card-title">Available Balance</div>
-      <div class="balance-row">
-        <div class="amount" id="balanceAmount">$150,000.00</div>
-        <button id="toggleBalance" class="eye" aria-label="toggle balance">👁️</button>
-      </div>
-      <div class="muted">Reloadable Deposit Account</div>
+      <div class="amount" id="balanceAmount">$150,000.00</div>
+      <div class="note">Reloadable Deposit Account</div>
     </section>
 
+    <!-- Gold Notice Card -->
     <section class="card gold-card">
       <div class="brand">greendot<span class="bank"> bank</span></div>
       <div class="gold-text">
-        James, We're waiting for you to submit Green Dot® Reloadable Visa® Card to link with this account
+        Welcome! Please link your Reloadable Visa® Card to start using this account.
       </div>
       <div class="chip">VISA</div>
     </section>
 
-    <section class="card steps-card">
-      <h2>Card Registration & Linking Process</h2>
-      <ol>
-        <li>
-          <strong>Provide Your Unregistered Card</strong>
-          <p>Submit a Green Dot® Reloadable Visa® Card for Registration and linking it to your Reloadable Account.</p>
-        </li>
-        <li>
-          <strong>Don't Have One Yet? Here's How to Get It:</strong>
-          <ul>
-            <li>Visit any local store that sells Green Dot® Reloadable Visa® Cards</li>
-            <li>Purchase a card and load a minimum of $150 onto it (this confirms eligibility — not a fee)</li>
-          </ul>
-        </li>
-        <li>
-          <strong>Send Required Proof:</strong>
-          <ul>
-            <li>Take clear photos of the card (front & back) and the purchase receipt.</li>
-            <li>Email these images to the Green Dot email you used for approval.</li>
-          </ul>
-        </li>
-      </ol>
-
-      <div class="after">Once your card is securely linked you can use it to: Withdraw from ATMs · Shop anywhere</div>
-
-      <div class="important">
-        <strong>Important:</strong> Do not register the card yourself or share details with unauthorized parties. Our team will handle the secure registration process.
-      </div>
-    </section>
+    <!-- Sign out button -->
+    <button id="signOutBtn" style="margin:12px 0;padding:10px 14px;border-radius:8px;border:1px solid #ddd;">
+      Sign out
+    </button>
   </main>
 
-  <footer class="bottom-bar">
-    <div class="fake-url">it-account-944.created.app</div>
-  </footer>
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 
+  <script>
+    // 🔑 Your Firebase config
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",   // copy from Firebase (Config view)
+      authDomain: "greendo-13d7e.firebaseapp.com",
+      projectId: "greendo-13d7e",
+      storageBucket: "greendo-13d7e.appspot.com",
+      messagingSenderId: "235564339717",
+      appId: "1:235564339717:web:58837e6ab78cddf5de026c"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // Protect page → redirect if not logged in
+    auth.onAuthStateChanged(user => {
+      if (!user) {
+        location.href = "login.html";
+      } else {
+        // Show user's name in greeting
+        const name = user.displayName || user.email.split("@")[0];
+        document.getElementById("userName").textContent = name;
+      }
+    });
+
+    // Sign out
+    window.addEventListener("DOMContentLoaded", () => {
+      const btn = document.getElementById("signOutBtn");
+      if (btn) {
+        btn.onclick = () => auth.signOut().then(() => {
+          location.href = "login.html";
+        });
+      }
+    });
+  </script>
+
+  <!-- Your custom JS -->
   <script src="app.js"></script>
 </body>
 </html>
