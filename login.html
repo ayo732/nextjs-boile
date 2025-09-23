@@ -48,5 +48,49 @@
         .catch(err => alert(err.message));
     };
   </script>
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+
+<script>
+  // 🔑 Your Firebase keys (copy from Firebase > Project settings > Config)
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY_HERE",
+    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT_ID.appspot.com",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId: "YOUR_APP_ID"
+  };
+
+  // Start Firebase
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+
+  // 🔓 LOGIN
+  document.getElementById("loginBtn").onclick = function() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    auth.signInWithEmailAndPassword(email, password)
+      .then(user => {
+        alert("✅ Logged in as " + user.user.email);
+        window.location.href = "index.html"; // send to homepage
+      })
+      .catch(error => alert(error.message));
+  };
+
+  // 🆕 SIGN UP
+  document.getElementById("signupBtn").onclick = function() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    auth.createUserWithEmailAndPassword(email, password)
+      .then(user => {
+        alert("🎉 Account created: " + user.user.email);
+      })
+      .catch(error => alert(error.message));
+  };
+</script>
 </body>
 </html>
