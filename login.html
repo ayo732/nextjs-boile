@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+</head>
+<body>
+  <h2>Login</h2>
+  <input type="email" id="email" placeholder="Email">
+  <input type="password" id="password" placeholder="Password">
+  <button id="loginBtn">Login</button>
+  <button id="signupBtn">Sign Up</button>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+
+  <script>
+    // Copy same firebaseConfig you used in index.html
+    const firebaseConfig = {
+      apiKey: "AIzaSyD01Gc702bu4mwK1...",
+      authDomain: "greendo-13d7e.firebaseapp.com",
+      projectId: "greendo-13d7e",
+      storageBucket: "greendo-13d7e.appspot.com",
+      messagingSenderId: "235564339717",
+      appId: "1:235564339717:web:58837e6ab78cddf5de026c",
+      measurementId: "G-JXSG89QC7"
+    };
+
+    // Init Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // Login
+    document.getElementById("loginBtn").onclick = () => {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      auth.signInWithEmailAndPassword(email, password)
+        .then(() => location.href = "index.html")
+        .catch(err => alert(err.message));
+    };
+
+    // Sign Up
+    document.getElementById("signupBtn").onclick = () => {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      auth.createUserWithEmailAndPassword(email, password)
+        .then(() => location.href = "index.html")
+        .catch(err => alert(err.message));
+    };
+  </script>
+</body>
+</html>
