@@ -1,24 +1,24 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Reloadable Account – demo</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>Dashboard</title>
+
+  <!-- Firebase SDKs (v8) -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+
+  <style>
+    body { font-family: -apple-system, system-ui, Segoe UI, Roboto, sans-serif; padding: 16px; }
+    .card { max-width: 640px; margin: 0 auto; }
+    #codeLeak { display:none; } /* guard in case */
+  </style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="logo">
-      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%2300aa00'/%3E%3C/svg%3E" alt="logo" />
-    </div>
-  </header>
-
-  <main class="container">
-    <!-- Greeting -->
-    <div class="greeting">
-      <div class="check"></div>
-      <div>You're welcome, <strong id="userName">Guest</strong></div>
-    </div>
+  <div class="card">
+    <p style="background:#e7f5e7;padding:10px;border-radius:8px">
+      • You're welcome,
 
     <!-- Balance Card -->
     <section class="card balance-card">
