@@ -1,77 +1,58 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Dashboard</title>
+</head>
+<body>
+  <p style="background:#e7f5e7;padding:10px;border-radius:8px;">
+    • You're welcome, <strong id="who">Guest</strong>
+  </p>
+
+  <h2>Available Balance</h2>
+  <h1>$150,000.00</h1>
+  <p>Reloadable Deposit Account</p>
+  <p>greendot bank</p>
+  <p>Welcome! Please link your Reloadable Visa® Card to start using this account.</p>
+  <p>VISA</p>
+
+  <button id="signOutBtn">Sign out</button>
 
   <!-- Firebase SDKs (v8) -->
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
 
-  <style>
-    body { font-family: -apple-system, system-ui, Segoe UI, Roboto, sans-serif; padding: 16px; }
-    .card { max-width: 640px; margin: 0 auto; }
-    #codeLeak { display:none; } /* guard in case */
-  </style>
-</head>
-<body>
-  <div class="card">
-    <p style="background:#e7f5e7;padding:10px;border-radius:8px">
-      • You're welcome,
+  <!-- Your code (must be inside this script; make sure it CLOSES) -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIza...YOUR_KEY...",
+      authDomain: "your-project-id.firebaseapp.com",
+      projectId: "your-project-id",
+      storageBucket: "your-project-id.appspot.com",
+      messagingSenderId: "235564339717",
+      appId: "1:235564339717:web:xxxx",
+      measurementId: "G-XXXX"
+    };
 
-    <!-- Balance Card -->
-    <section class="card balance-card">
-      <div class="card-title">Available Balance</div>
-      <div class="amount" id="balanceAmount">$150,000.00</div>
-      <div class="note">Reloadable Deposit Account</div>
-    </section>
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
 
-    <!-- Gold Notice Card -->
-    <section class="card gold-card">
-      <div class="brand">greendot<span class="bank"> bank</span></div>
-      <div class="gold-text">
-        Welcome! Please link your Reloadable Visa® Card to start using this account.
-      </div>
-      <div class="chip">VISA</div>
-    </section>
+    // Redirect guests to login
+    auth.onAuthStateChanged(user => {
+      if (!user) { location.replace("login.html"); return; }
+      const who = document.getElementById("who");
+      if (who) who.textContent = user.email || "User";
+    });
 
-  <!-- Sign out button in your HTML -->
-<button id="signOutBtn">Sign out</button>
-
-<!-- Firebase SDKs -->
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-
-<!-- Your script block -->
-<script>
-  const firebaseConfig = {
-    apiKey: "AIza...yourKey...",
-    authDomain: "greendo-13d7e.firebaseapp.com",
-    projectId: "greendo-13d7e",
-    storageBucket: "greendo-13d7e.appspot.com",
-    messagingSenderId: "235564339717",
-    appId: "1:235564339717:web:xxxxxx",
-    measurementId: "G-XXXX"
-  };
-
-  firebase.initializeApp(firebaseConfig);
-  const auth = firebase.auth();
-
-  // Protect page: if not signed in, redirect
-  auth.onAuthStateChanged(user => {
-    if (!user) {
-      location.replace("login.html");
-    }
-  });
-
-  // Sign out handler
-  window.addEventListener("DOMContentLoaded", () => {
-    const btn = document.getElementById("signOutBtn");
-    if (btn) {
-      btn.onclick = () => auth.signOut().then(() => {
-        location.replace("
-</script>
+    // Sign out
+    window.addEventListener("DOMContentLoaded", () => {
+      const btn = document.getElementById("signOutBtn");
+      if (btn) btn.onclick = () => auth.signOut().then(() => location.replace("login.html"));
+    });
+  </script>
+</body>
+</html>
 
 <!-- keep this last -->
 <script src="app.js"></script>
